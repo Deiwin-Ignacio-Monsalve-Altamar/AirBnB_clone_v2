@@ -2,25 +2,21 @@
 """that distributes an archive"""
 from fabric.api import local, put, env, run
 from datetime import datetime
-from os import path
+from os import path, stat
 
 env.hosts = ['35.196.97.61', '34.75.200.40']
 
 
 def do_pack():
-    """contents of the web_static"""
-    f = datetime.now()
+    n = datetime.now()
+    filename = "web_static_{}{}{}{}{}{}.tgz".format(n.year, n.month, n.day,
+                                                    n.hour, n.minute, n.second)
+    local("mkdir -p versions")
+    path = local("tar -cvzf versions/{} web_static".format(filename))
+    print("web_static packed: versions/{} -> {}"
+          .format(filename, stat('versions/' + filename).st_size))
 
-    file_name = "web_static_{}{}{}{}{}{}.tgz".format(
-        f.year, f.month, f.day, f.hour, f.minute, f.second)
-
-    local('mkdir -p versions')
-    result = local('tar -cvzf versions/{} web_static'.format(file_name))
-    print("Packing web_static to versions/{}".format(file_name))
-
-    if result == 0:
-        return "versions/{}".format(file_name)
-    return None
+    return "versions/{}".format(filename)
 
 
 def do_deploy(archive_path):
@@ -43,6 +39,7 @@ def do_deploy(archive_path):
         return True
     except Exception as e:
         return False
+
 
 def deploy():
     """Extraer function"""
