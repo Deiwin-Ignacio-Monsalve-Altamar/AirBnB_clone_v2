@@ -6,6 +6,7 @@ from os import path
 
 
 env.hosts = ['35.196.97.61', '34.75.200.40']
+env.user = 'ubuntu'
 
 
 def do_deploy(archive_path):
@@ -17,7 +18,6 @@ def do_deploy(archive_path):
     archive_file = archive_path.split('/')[1]
     name_file = archive_file.split('.tgz')
     release = '/data/web_static/releases/{}'.format(name_file)
-    local('mkdir -p {}'.format(release))
 
     try:
         current_file = '/data/web_static/current'
@@ -26,7 +26,7 @@ def do_deploy(archive_path):
         run('rm -rf /tmp/{}'.format(archive_file))
         run('rm -rf {}'.format(current_file))
         run('ln -sf {} {}'.format(current_file, release))
-    except Exception:
+        return True
+    except Exception as e:
         return False
 
-    return True
