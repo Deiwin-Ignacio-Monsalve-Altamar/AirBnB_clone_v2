@@ -20,10 +20,14 @@ def do_deploy(archive_path):
     release = '/data/web_static/releases/{}'.format(name_file)
 
     try:
-        current_file = '/data/web_static/current'
         put(archive_path, '/tmp/')
+        run('mkdir -p {}'.format(release))
         run('tar -xzf /tmp/{} -C {}'.format(archive_file, release))
         run('rm -rf /tmp/{}'.format(archive_file))
+        run('mv {}//web_static/* {}'.format(release, release))
+        run('rm -rf {}/web_static'.format(release))
+        
+        current_file = '/data/web_static/current'
         run('rm -rf {}'.format(current_file))
         run('ln -sf {} {}'.format(current_file, release))
         return True
