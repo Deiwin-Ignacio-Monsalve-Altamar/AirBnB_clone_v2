@@ -7,6 +7,22 @@ from os import path, stat
 env.hosts = ['35.196.97.61', '34.75.200.40']
 
 
+def do_pack():
+    """contents of the web_static"""
+    f = datetime.now()
+
+    file_name = "web_static_{}{}{}{}{}{}.tgz".format(
+        f.year, f.month, f.day, f.hour, f.minute, f.second)
+
+    local('mkdir -p versions')
+    result = local('tar -cvzf versions/{} web_static'.format(file_name))
+    print("Packing web_static to versions/{}".format(file_name))
+
+    if result == 0:
+        return "versions/{}".format(file_name)
+    return None
+
+
 def do_deploy(archive_path):
     """Script distributes an archive"""
     if not path.exists(archive_path):
