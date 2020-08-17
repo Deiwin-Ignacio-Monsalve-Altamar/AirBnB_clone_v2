@@ -12,7 +12,6 @@ def do_deploy(archive_path):
     if not path.exists(archive_path):
         return False
 
-
     try:
         archive_file = archive_path.split('/')[1]
         file_no_ext = archive_file.split('.')[0]
@@ -25,6 +24,6 @@ def do_deploy(archive_path):
         run('sudo rm -rf {}/web_static'.format(releases))
         run('sudo rm -rf /data/web_static/current')
         run('sudo ln -s {} /data/web_static/current'.format(releases))
+        return True
     except Exception as e:
         return False
-    return True
