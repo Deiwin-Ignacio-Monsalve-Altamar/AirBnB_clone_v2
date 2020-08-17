@@ -9,7 +9,7 @@ env.hosts = ['35.196.97.61', '34.75.200.40']
 
 def do_deploy(archive_path):
     """Script distributes an archive"""
-    if not path.isfile(archive_path):
+    if not path.exists(archive_path):
         return False
 
     archive_file = archive_path.split('/')[1]
