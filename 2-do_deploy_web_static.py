@@ -2,7 +2,7 @@
 """that distributes an archive"""
 from fabric.api import local, put, env, run
 from datetime import datetime
-from os import path, stat
+from os import path
 
 env.hosts = ['35.196.97.61', '34.75.200.40']
 
