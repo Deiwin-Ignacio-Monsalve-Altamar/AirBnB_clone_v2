@@ -8,6 +8,7 @@ env.hosts = ['35.196.97.61', '34.75.200.40']
 
 
 def do_pack():
+    """that distributes an archive"""
     n = datetime.now()
     filename = "web_static_{}{}{}{}{}{}.tgz".format(n.year, n.month, n.day,
                                                     n.hour, n.minute, n.second)
