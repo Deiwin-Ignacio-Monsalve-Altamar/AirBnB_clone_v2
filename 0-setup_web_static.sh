@@ -4,12 +4,10 @@ sudo apt-get -y update
 sudo apt-get install -y nginx
 sudo service nginx start
 
-sudo mkdir -p "/data/"
-sudo mkdir -p "/data/web_static/"
-sudo mkdir -p "/data/web_static/releases/"
 sudo mkdir -p "/data/web_static/shared/"
 sudo mkdir -p "/data/web_static/releases/test/"
-sudo echo "some simple data" > "/data/web_static/releases/test/index.html"
+sudo touch "/data/web_static/releases/test/index.html"
+sudo echo "some simple data" | sudo tee "/data/web_static/releases/test/index.html"
 
 link_file="/data/web_static/current"
 destination="/data/web_static/releases/test/"
