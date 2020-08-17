@@ -44,11 +44,11 @@ def do_deploy(archive_path):
     except Exception as e:
         return False
 
-    def deploy():
-        """Extraer function"""
-        try:
-            archive_path = do_pack()
-            value = do_deploy(archive_path)
-            return value
-        except BaseException:
-            return False
+def deploy():
+    """Extraer function"""
+    try:
+        archive_path = do_pack()
+        value = do_deploy(archive_path)
+        return value
+    except BaseException:
+        return False
