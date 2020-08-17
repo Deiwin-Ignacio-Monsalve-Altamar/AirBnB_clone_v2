@@ -12,19 +12,19 @@ def do_deploy(archive_path):
     if not path.exists(archive_path):
         return False
 
-    archive_file = archive_path.split('/')[1]
-    file_no_ext = archive_file.split('.')[0]
-    releases = '/data/web_static/releases/{}/'.format(file_no_ext)
 
     try:
+        archive_file = archive_path.split('/')[1]
+        file_no_ext = archive_file.split('.')[0]
+        releases = '/data/web_static/releases/versions/{}/'.format(file_no_ext)
         put(archive_path, '/tmp')
-        run('mkdir -p {}'.format(releases))
-        run('tar -xzf /tmp/{} -C {}'.format(archive_file, releases))
-        run('rm /tmp/{}'.format(archive_file))
-        run('mv {}/web_static/* {}'.format(releases, releases))
-        run('rm -rf {}/web_static'.format(releases))
-        run('rm -rf /data/web_static/current')
-        run('ln -s {} /data/web_static/current'.format(releases))
-        return True
+        run('sudo mkdir -p {}'.format(releases))
+        run('sudo tar -xvf /tmp/{} -C {}'.format(archive_file, releases))
+        run('sudo rm /tmp/{}'.format(archive_file))
+        run('sudo mv {}/web_static/* {}'.format(releases, releases))
+        run('sudo rm -rf {}/web_static'.format(releases))
+        run('sudo rm -rf /data/web_static/current')
+        run('sudo ln -s {} /data/web_static/current'.format(releases))
     except Exception as e:
         return False
+    return True
