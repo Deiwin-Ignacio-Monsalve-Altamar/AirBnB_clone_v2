@@ -13,7 +13,7 @@ def do_pack():
         f.year, f.month, f.day, f.hour, f.minute, f.second)
 
     local('mkdir -p versions')
-    result = local('tar -cvf versions/{} web_static'.format(file_name))
+    result = local('tar -cvzf versions/{} web_static'.format(file_name))
     print("Packing web_static to versions/{}".format(file_name))
 
     if result == 0:
