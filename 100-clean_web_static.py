@@ -61,7 +61,8 @@ def do_clean(number=0):
                 local("rm versions/{}".format(line))
         local("rm temp.txt")
     else:
-        local("ls -tr versions | tail -n +{} > temp.txt".format(int(number) + 1))
+        local("ls -tr versions | tail -n +{} >\
+              temp.txt".format(int(number) + 1))
         with open('temp.txt', mode='r') as f:
             for line in f:
                 local("rm versions/{}".format(line))
