@@ -51,16 +51,18 @@ def deploy():
     except BaseException:
         return False
 
+
 def do_clean(number=0):
-    """ Deletes out-of-date archives"""
-    number = int(number)
-    with lcd('versions'):
-        if number == 0 or number == 1:
-            local('ls -t | tail -n +2 | xargs rm -rfv')
-        else:
-            local('ls -t | tail -n +{} | xargs rm -rfv'.format(number + 1))
-    with cd('/data/web_static/releases/'):
-        if number == 0 or number == 1:
-            run('ls -t | tail -n +2 | xargs rm -rfv')
-        else:
-            run('ls -t | tail -n +{} | xargs rm -rfv'.format(number + 1))
+    """DelteQQ"""
+    if number in [0, 1]:
+        local("ls -tr versions | tail -n +2 > temp.txt")
+        with open('temp.txt', mode='r') as f:
+            for line in f:
+                local("rm versions/{}".format(line))
+        local("rm temp.txt")
+    else:
+        local("ls -tr versions | tail -n +{} > temp.txt".format(int(number) + 1))
+        with open('temp.txt', mode='r') as f:
+            for line in f:
+                local("rm versions/{}".format(line))
+        local("rm temp.txt")
