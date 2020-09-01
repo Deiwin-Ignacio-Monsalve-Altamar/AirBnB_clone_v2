@@ -1,4 +1,4 @@
-#!/bin/usr/python
+#!/usr/bin/python3
 """/: display “Hello HBNB!”
 /hbnb: display “HBNB”
 /c/<text>: display “C ”, followed by the value of the text variable
@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route('/', strict_slashes=False)
 def hello_world():
     """starts a Flask web hello_world"""
-    return 'Hello, HBNB!'
+    return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
