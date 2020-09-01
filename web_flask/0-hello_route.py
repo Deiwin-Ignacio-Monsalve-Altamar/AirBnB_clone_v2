@@ -11,7 +11,7 @@ app = Flask(__name__)
 def hello_world():
     """starts a Flask web application
     """
-    return 'Hello, HBNB!'
+    return 'Hello HBNB!'
 
 
 if __name__ == '__main__':
