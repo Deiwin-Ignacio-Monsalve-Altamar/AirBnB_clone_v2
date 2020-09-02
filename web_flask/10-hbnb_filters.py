@@ -5,6 +5,7 @@ from models import storage
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
+from models.place import Place
 
 
 app = Flask(__name__)
@@ -18,6 +19,12 @@ def teardown(self):
 
 @app.route('/hbnb_filters')
 def hbnb_filters():
+
+    for place in storage.all(Amenity).values():
+        if i == 4:
+            break
+        print(place)
+        i = i + 1
     conntext = {
         'states': storage.all(State).values(),
         'cities': storage.all(City).values(),
